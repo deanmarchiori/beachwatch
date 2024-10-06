@@ -12,6 +12,7 @@ temperature at Sydney beaches.
 
 ```{r}
 library(tidyverse)
+library(mgcv)
 ```
 
 ## Get Data  
