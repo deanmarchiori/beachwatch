@@ -1,0 +1,110 @@
+---
+title: "BeachWatch Model"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+This notebook reads in the BeachWatch data and fits a model to predict water
+temperature at Sydney beaches. 
+
+## Setup 
+
+```{r}
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(mgcv)
+library(beachwatch)
+library(pins)
+library(vetiver)
+library(plumber)
+library(here)
+```
+
+## Get Data  
+
+```{r}
+data(sydney_water_temp)
+```
+
+## Clean Data  
+
+## EDA  
+
+```{r}
+sydney_water_temp |> 
+  dplyr::count(beach, sort = TRUE)
+```
+
+```{r}
+ggplot(data = sydney_water_temp) +
+  geom_boxplot(aes(month_lab, temp))
+```
+
+```{r}
+sydney_water_temp |> 
+  ggplot() +
+  geom_histogram(aes(temp), binwidth = 1)
+```
+
+```{r}
+sydney_water_temp |> 
+  count(month, hour) |> 
+  ggplot() +
+  geom_tile(aes(hour, month, fill = n))
+```
+
+## Model 
+
+Fitting a GAM to predict Water Temperature.  
+
+```{r}
+mod_gam <- fit_water_temp_model(data = sydney_water_temp)
+mod_gam
+summary(mod_gam)
+plot(mod_gam)
+```
+
+## Save Model
+
+### Create pins board  
+
+```{r}
+deploy_board <- pins::board_folder(path = here("inst/deploy"), versioned = TRUE)
+```
+
+### Save model 
+
+```{r}
+v <- vetiver_model(
+  model = mod_gam,
+  model_name = "sydney-beach-gam",
+  metadata = list(aic = mod_gam$aic),
+  save_prototype = data.frame(
+    month = 12,
+    hour = 6,
+    beach = factor("Bondi Beach", levels = levels(sydney_water_temp$beach))
+  )
+)
+
+vetiver_pin_write(board = deploy_board, vetiver_model = v)
+```
+
+### Deployment 
+
+Test 
+
+```{r}
+#| eval: false
+pr() %>%
+  vetiver_api(v) |> 
+  pr_run(port = 8080)
+```
+
+Create Deployment artefacts 
+
+```{r}
+vetiver_prepare_docker(board = deploy_board, name = "sydney-beach-gam", docker_args = list(port = 8080), path = here::here())
+```
+
