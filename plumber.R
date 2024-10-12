@@ -4,8 +4,8 @@ library(pins)
 library(plumber)
 library(rapidoc)
 library(vetiver)
-b <- board_folder(path = "/home/deanmarchiori/workspace/beachwatch/inst/deploy")
-v <- vetiver_pin_read(b, "sydney-beach-gam", version = "20241007T021501Z-bb3f3")
+b <- board_folder(path = "inst/deploy")
+v <- vetiver_pin_read(b, "sydney-beach-gam")
 
 #* @plumber
 function(pr) {

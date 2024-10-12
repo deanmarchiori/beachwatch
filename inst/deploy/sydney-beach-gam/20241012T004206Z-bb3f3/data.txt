@@ -6,7 +6,7 @@ title: 'sydney-beach-gam: a pinned list'
 description: A generalized additive model (gaussian family, identity link)
 tags: ~
 urls: ~
-created: 20241007T021501Z
+created: 20241012T004206Z
 api_version: 1
 user:
   aic: 29114.71767

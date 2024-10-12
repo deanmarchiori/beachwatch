@@ -14,5 +14,7 @@
 #'   \item{month_lab}{Factor label for month of measurement}
 #'   ...
 #' }
-#' @source <https://beachwatch.nsw.gov.au/waterMonitoring/waterQualityData> licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)
+#' @source <https://beachwatch.nsw.gov.au/waterMonitoring/waterQualityData>
+#' @source licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)
 "sydney_water_temp"
+

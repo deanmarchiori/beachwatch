@@ -1,11 +1,12 @@
 ## code to prepare `sydney_water_temp_raw` dataset goes here
 library(readr)
+library(here)
 library(dplyr)
 library(lubridate)
 
-sydney_water_temp_raw <- system.file("extdata", "Waterquality1727670437021.csv", package = "beachwatch")
+sydney_water_temp_raw <- read_csv(here("data-raw", "Waterquality1727670437021.csv"))
 
-sydney_water_temp <- readr::read_csv(sydney_water_temp_raw) |>
+sydney_water_temp <- sydney_water_temp_raw |>
   transmute(temp = `Water temperature (°C)`,
             beach = `Swim site`,
             date = Date,

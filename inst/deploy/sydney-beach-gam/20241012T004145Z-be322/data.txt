@@ -1,14 +1,14 @@
 file: sydney-beach-gam.rds
-file_size: 416173
-pin_hash: bb3f3af062cceea5
+file_size: 270871
+pin_hash: be3221d0004d653a
 type: rds
 title: 'sydney-beach-gam: a pinned list'
 description: A generalized additive model (gaussian family, identity link)
 tags: ~
 urls: ~
-created: 20241007T015537Z
+created: 20241012T004145Z
 api_version: 1
 user:
-  aic: 29114.71767
+  aic: 15885.2954912
   required_pkgs: mgcv
   renv_lock: ~

@@ -18,7 +18,9 @@ A data frame with 8947 rows and 7 columns:
 }
 }
 \source{
-\url{https://beachwatch.nsw.gov.au/waterMonitoring/waterQualityData} licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)
+\url{https://beachwatch.nsw.gov.au/waterMonitoring/waterQualityData}
+
+licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)
 }
 \usage{
 sydney_water_temp
